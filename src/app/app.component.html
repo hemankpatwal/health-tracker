@@ -1,16 +1,7 @@
-<main class="main">
-  <div class="content">
-    <div class="left-side">
-      <h1 class="text-3xl font-bold underline">Hello, {{ title }}</h1>
-      <p>Track your workouts with charts below:</p>
+<div class="min-h-screen bg-gray-100 py-8">
+  <div class="space-y-8">
+    <app-workout-form></app-workout-form>
 
-      <!-- ChartJS Display -->
-      <div style="display: block;">
-        <canvas baseChart
-          [data]="chartData"
-          [type]="chartType">
-        </canvas>
-      </div>
-    </div>
+    <app-workout-list></app-workout-list>
   </div>
-</main>
+</div>
