@@ -1,0 +1,16 @@
+<div class="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg">
+    <h2 class="text-2xl font-bold mb-4 text-center">Workout Progress</h2>
+  
+    <div *ngIf="barChartLabels.length > 0">
+      <canvas baseChart
+        [data]="barChartData"
+        [type]="'bar'"
+        [options]="{ responsive: true }">
+      </canvas>
+    </div>
+  
+    <p *ngIf="barChartLabels.length === 0" class="text-center text-gray-500">
+      No workouts added yet.
+    </p>
+</div>
+  

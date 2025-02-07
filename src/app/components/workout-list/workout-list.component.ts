@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { WorkoutService } from '../../services/workout.service';
 import { Workout } from '../../models/workout.model';
 import { CommonModule } from '@angular/common';
@@ -21,6 +21,9 @@ export class WorkoutListComponent implements OnInit {
   // Pagination properties
   currentPage: number = 1;
   itemsPerPage: number = 5;
+
+  @Output() filteredWorkoutsChanged = new EventEmitter<Workout[]>(); // ✅ Emit filtered workouts
+
 
   constructor(private workoutService: WorkoutService) {}
 

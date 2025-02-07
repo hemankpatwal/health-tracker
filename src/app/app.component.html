@@ -2,6 +2,8 @@
   <div class="space-y-8">
     <app-workout-form></app-workout-form>
 
-    <app-workout-list></app-workout-list>
+    <app-workout-list (filteredWorkoutsChanged)="filteredWorkouts = $event" ></app-workout-list>
+
+    <app-workout-progress [workouts]="filteredWorkouts"></app-workout-progress>
   </div>
 </div>
