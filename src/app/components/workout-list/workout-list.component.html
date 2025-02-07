@@ -34,11 +34,30 @@
       </tr>
     </thead>
     <tbody class="bg-white divide-y divide-gray-200">
-      <tr *ngFor="let workout of filteredWorkouts">
+      <tr *ngFor="let workout of displayedWorkouts">
         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ workout.userName }}</td>
         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ workout.workoutType }}</td>
         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ workout.workoutMinutes }}</td>
       </tr>
     </tbody>
   </table>
+
+   <!-- Pagination Controls -->
+   <div class="flex justify-center space-x-4 mt-4">
+    <button
+      (click)="prevPage()"
+      [disabled]="currentPage === 1"
+      class="px-4 py-2 bg-gray-300 rounded-md disabled:opacity-50"
+    >
+      Previous
+    </button>
+    <span class="px-4 py-2">Page {{ currentPage }}</span>
+    <button
+      (click)="nextPage()"
+      [disabled]="currentPage * itemsPerPage >= filteredWorkouts.length"
+      class="px-4 py-2 bg-gray-300 rounded-md disabled:opacity-50"
+    >
+      Next
+    </button>
+  </div>
 </div>

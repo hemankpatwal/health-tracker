@@ -14,8 +14,13 @@ import { FormsModule } from '@angular/forms';
 export class WorkoutListComponent implements OnInit {
   workouts: Workout[] = [];
   filteredWorkouts: Workout[] = []; // Filtered list of workouts
+  displayedWorkouts: Workout[] = [];
   searchText: string = ''; // Search input value
   selectedWorkoutType: string = ''; // Selected workout type filter
+
+  // Pagination properties
+  currentPage: number = 1;
+  itemsPerPage: number = 5;
 
   constructor(private workoutService: WorkoutService) {}
 
@@ -45,8 +50,39 @@ export class WorkoutListComponent implements OnInit {
   
       return matchesSearch && matchesWorkoutType;
     });
-  
+    
+    this.currentPage = 1; // Reset to first page when filtering
+    this.updateDisplayedWorkouts();
+
     console.log('Filtered Workouts:', this.filteredWorkouts); // Debugging log
+  }
+
+  // Pagination logic
+  updateDisplayedWorkouts(): void {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.displayedWorkouts = this.filteredWorkouts.slice(startIndex, endIndex);
+
+    console.log(`Current Page: ${this.currentPage}`);
+    console.log(`Displaying Workouts:`, this.displayedWorkouts);
+  }
+
+  nextPage(): void {
+    if (this.currentPage * this.itemsPerPage < this.filteredWorkouts.length) {
+      this.currentPage++;
+      this.updateDisplayedWorkouts();
+
+      console.log(`Next Page Clicked, Current Page: ${this.currentPage}`);
+    }
+  }
+
+  prevPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updateDisplayedWorkouts();
+
+      console.log(`Previous Page Clicked, Current Page: ${this.currentPage}`);
+    }
   }
   
   onSearchChange(): void {
