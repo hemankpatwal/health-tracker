@@ -1,5 +1,30 @@
 <div class="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg">
   <h2 class="text-2xl font-bold mb-4 text-center">Workout List</h2>
+
+  <div class="flex space-x-4 mb-6">
+    <!-- Search by User Name -->
+    <input
+      type="text"
+      [(ngModel)]="searchText"
+      (input)="onSearchChange()"
+      placeholder="Search by name"
+      class="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+    />
+
+    <!-- Filter by Workout Type -->
+    <select
+      [(ngModel)]="selectedWorkoutType"
+      (change)="onWorkoutTypeChange()"
+      class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+    >
+      <option value="">All Workouts</option>
+      <option value="Running">Running</option>
+      <option value="Cycling">Cycling</option>
+      <option value="Swimming">Swimming</option>
+      <option value="Weightlifting">Weightlifting</option>
+    </select>
+  </div>
+
   <table class="min-w-full divide-y divide-gray-200">
     <thead class="bg-gray-50">
       <tr>
@@ -9,7 +34,7 @@
       </tr>
     </thead>
     <tbody class="bg-white divide-y divide-gray-200">
-      <tr *ngFor="let workout of workouts">
+      <tr *ngFor="let workout of filteredWorkouts">
         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ workout.userName }}</td>
         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ workout.workoutType }}</td>
         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ workout.workoutMinutes }}</td>
